@@ -2,10 +2,10 @@ function init() {
 	let scene = new THREE.Scene();
 
 	let camera = new THREE.PerspectiveCamera(
-	65,
-	window.innerWidth/ window.innerHeight,
-	0.1,
-	1000);
+		65,
+		window.innerWidth/ window.innerHeight,
+		0.1,
+		1000);
 	camera.position.set(30, 120, 60);
 	camera.lookAt(scene.position);
 
@@ -42,30 +42,29 @@ function init() {
 	plane.position.set(0, -65, -20);
 	plane.rotation.x = -0.5 * Math.PI;
 
-
 	let material = new THREE.MeshPhysicalMaterial({
 		color: 0xFF4500});
 	material.visible = false;
 
-    let sphere1 = createMesh(new THREE.SphereGeometry(44, 20, 30));
-    sphere1.position.set(10, 15, 0);
-    let sphere2 = createMesh(new THREE.SphereGeometry(45, 20, 30));
-    sphere2.position.set(10, 15, 0);
-    let sphere3 = createMesh(new THREE.SphereGeometry(43, 20, 30));
-    sphere3.position.set(10, 15, 0);
-    let molecule = createMesh(new THREE.IcosahedronGeometry( 50, 0 ));
-    molecule.position.set(11, 15, 0);
+	let sphere1 = createMesh(new THREE.SphereGeometry(44, 20, 30));
+	sphere1.position.set(10, 15, 0);
+	let sphere2 = createMesh(new THREE.SphereGeometry(45, 20, 30));
+	sphere2.position.set(10, 15, 0);
+	let sphere3 = createMesh(new THREE.SphereGeometry(43, 20, 30));
+	sphere3.position.set(10, 15, 0);
+	let molecule = createMesh(new THREE.IcosahedronGeometry( 50, 0 ));
+	molecule.position.set(11, 15, 0);
 
 	let sphere1BSP = new ThreeBSP(sphere1);
 	let sphere2BSP = new ThreeBSP(sphere2);
 	let sphere3BSP = new ThreeBSP(sphere3);
-    let moleculeBSP = new ThreeBSP(molecule);
+	let moleculeBSP = new ThreeBSP(molecule);
 
-    let result1BSP = sphere1BSP.subtract(sphere2BSP);
-    let result2BSP = moleculeBSP.intersect(result1BSP);
-    let result3BSP = result2BSP.subtract(sphere3BSP);
-    let cell = result3BSP.toMesh();
-    cell.material = new THREE.MeshPhysicalMaterial({
+	let result1BSP = sphere1BSP.subtract(sphere2BSP);
+	let result2BSP = moleculeBSP.intersect(result1BSP);
+	let result3BSP = result2BSP.subtract(sphere3BSP);
+	let cell = result3BSP.toMesh();
+	cell.material = new THREE.MeshPhysicalMaterial({
 		color: 0xe4eac5,
 		opacity: 0.6,
 		transparent: true,
@@ -75,17 +74,17 @@ function init() {
 		roughness: 0.1,
 		metalness: 0.93,
 		reflectivity: 0.6});
-    cell.castShadow = true;
+	cell.castShadow = true;
 
-    let sphere4 = createMesh(new THREE.SphereGeometry(9, 20, 30));
-    sphere4.position.set(21, 30, 61);
-    let sphere5 = createMesh(new THREE.SphereGeometry(10, 20, 30));
-    sphere5.position.set(24, 30, 60);
-    let sphere6 = createMesh(new THREE.SphereGeometry(9, 20, 30));
-    sphere6.position.set(19, 30, 59);
+	let sphere4 = createMesh(new THREE.SphereGeometry(9, 20, 30));
+	sphere4.position.set(21, 30, 61);
+	let sphere5 = createMesh(new THREE.SphereGeometry(10, 20, 30));
+	sphere5.position.set(24, 30, 60);
+	let sphere6 = createMesh(new THREE.SphereGeometry(9, 20, 30));
+	sphere6.position.set(19, 30, 59);
 
-    function addLeave(x, y, z, w) {
-    	let sphere4BSP = new ThreeBSP(sphere4);
+	function addLeave(x, y, z, w) {
+		let sphere4BSP = new ThreeBSP(sphere4);
 		let sphere5BSP = new ThreeBSP(sphere5);
 		let sphere6BSP = new ThreeBSP(sphere6);
 		let result4BSP = sphere4BSP.subtract(sphere5BSP);
@@ -132,14 +131,14 @@ function init() {
 	let path = new CustomSinCurve( 94 );
 	let stemGeometry = new THREE.TubeGeometry( path, 100, 0.5, 30, false );
 	let stemMaterial = new THREE.MeshPhysicalMaterial({
-				color: 0x525b76,
-				opacity: 0.3,
-				transparent: true,
-				side: THREE.DoubleSide,
-				emissive: 0xa2c3a4,
-				roughness: 0.2,
-				metalness: 0.9,
-				reflectivity: 0.6});;
+			color: 0x525b76,
+			opacity: 0.3,
+			transparent: true,
+			side: THREE.DoubleSide,
+			emissive: 0xa2c3a4,
+			roughness: 0.2,
+			metalness: 0.9,
+			reflectivity: 0.6});;
 
 	let stem1 = new THREE.Mesh( stemGeometry, stemMaterial );
 	stem1.position.set(24, 27, -220);
@@ -155,22 +154,22 @@ function init() {
 	stem3.castShadow = true;
 
 	scene.add(
-			light,
-			spotLight,
-			spotLight2,
-			plane,
-			sphere1,
-			sphere2,
-			sphere3,
-			sphere4, 
-			sphere5,
-			sphere6,
-			molecule,
-			cell,
-			stem1,
-			stem2,
-			stem3
-			);
+		light,
+		spotLight,
+		spotLight2,
+		plane,
+		sphere1,
+		sphere2,
+		sphere3,
+		sphere4, 
+		sphere5,
+		sphere6,
+		molecule,
+		cell,
+		stem1,
+		stem2,
+		stem3
+		);
 
 	let step = 0.02;
 
